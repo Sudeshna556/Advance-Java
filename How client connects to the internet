@@ -70,4 +70,11 @@ This **socket pair** uniquely identifies the communication channel.
 
 ## 🎯 Interview-Ready Explanation
 
-> “When I type `amazon.com`, my browser first queries DNS to resolve the domain into an IP address. That IP points to Amazon’s data center. Since servers run multiple applications, each application listens on a specific port — for HTTPS it’s port 443. My laptop then establishes a TCP connection from its IP and a random ephemeral port to Amazon’s IP on port 443. This socket pair uniquely identifies the communication channel. A TLS handshake secures the connection, and finally my request reaches Amazon’s web application, which processes it and sends back the response.”
+> “When I type `amazon.com`, my browser first queries DNS to resolve the domain into an IP address. That IP points to Amazon’s data center. 
+Since servers run multiple applications, each application listens on a specific port — for HTTPS it’s port 443. My laptop then establishes a 
+TCP connection from its IP and a random ephemeral port to Amazon’s IP on port 443. This socket pair uniquely identifies the communication channel. 
+A TLS handshake secures the connection, and finally my request reaches Amazon’s web application, which processes it and sends back the response.”
+
+
+
+
