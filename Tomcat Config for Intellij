@@ -1,0 +1,91 @@
+## 🧩 Step‑by‑Step Guide: Adding Tomcat in IntelliJ (with Smart Tomcat Plugin)
+
+### 1. Install Tomcat
+- Downloaded **Apache Tomcat 10.1.59**.  
+- Extracted it to:  
+  ```
+  C:\DevTools\apache-tomcat-10.1.59
+  ```
+
+### 2. Install Smart Tomcat Plugin
+- In IntelliJ, went to **Settings → Plugins → Marketplace**.  
+- Installed **Smart Tomcat** plugin (this plugin makes Tomcat integration easier).  
+- Restarted IntelliJ after installation.
+
+### 3. Create Project Structure
+Inside your project (`Project`), created the standard webapp structure:
+```
+src
+ └── main
+      └── webapp
+           ├── index.jsp
+           └── WEB-INF
+                └── web.xml
+```
+
+- `index.jsp` → entry page for your app.  
+- `WEB-INF/web.xml` → deployment descriptor (defines welcome file, servlet mappings, etc.).
+
+### 4. Configure Smart Tomcat
+- **Tomcat server:** Apache Tomcat 10.1.59  
+- **Catalina home:** `C:\DevTools\apache-tomcat-10.1.59`  
+- **Catalina base:** same as above (Tomcat folder, not your project).  
+- **Deployment directory:**  
+  ```
+  C:\Users\Aspire 7\IdeaProjects\Project\src\main\webapp
+  ```
+- **Context path:** `/Project`  
+  → App accessible at `http://localhost:8080/Project`.
+
+### 5. Add Test Files
+- `index.jsp` content:
+  ```jsp
+  <html>
+  <body>
+      <h2>Hello, Tomcat is running successfully!</h2>
+  </body>
+  </html>
+  ```
+- `web.xml` content:
+  ```xml
+  <web-app>
+      <welcome-file-list>
+          <welcome-file>index.jsp</welcome-file>
+      </welcome-file-list>
+  </web-app>
+  ```
+
+### 6. Run and Verify
+- Started Tomcat from IntelliJ using Smart Tomcat.  
+- Browser opened at `http://localhost:8080/Project`.  
+- Saw the JSP output confirming deployment.
+
+---
+
+## ⚠️ Mistakes Made (and Fixes)
+
+1. **Context path empty** → IntelliJ error “Context path cannot be empty.”  
+   ✅ Fixed by setting `/Project`.
+
+2. **Context path had trailing space (`Project%20`)** → URL mismatch, 404 error.  
+   ✅ Fixed by removing the space → `/Project`.
+
+3. **Catalina base set to project folder (`src\main\webapp`)** → Tomcat couldn’t create work/log/temp directories.  
+   ✅ Fixed by setting Catalina base to Tomcat installation folder.
+
+4. **No `index.jsp` initially** → 404 error when accessing `/Project`.  
+   ✅ Fixed by adding a minimal JSP file.
+
+---
+
+## ✅ Final Checklist 
+1. Install Tomcat → `C:\DevTools\apache-tomcat-10.1.59`.  
+2. Install **Smart Tomcat plugin** in IntelliJ.  
+3. In IntelliJ → Add Smart Tomcat config.  
+4. **Catalina home/base:** Tomcat folder.  
+5. **Deployment directory:** `src\main\webapp`.  
+6. **Context path:** `/Project`.  
+7. Create `index.jsp` and `WEB-INF/web.xml`.  
+8. Run → Open `http://localhost:8080/Project`.  
+
+---
