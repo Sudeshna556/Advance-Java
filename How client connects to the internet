@@ -76,5 +76,5 @@ TCP connection from its IP and a random ephemeral port to Amazon’s IP on port 
 A TLS handshake secures the connection, and finally my request reaches Amazon’s web application, which processes it and sends back the response.”
 
 
-https://app.notion.com/p/How-client-connects-to-the-internet-3c974d8ed35b8003bf57ffdebcbfa289?source=copy_link#3c974d8ed35b805a9e23e0bbd25263b0
+
 
