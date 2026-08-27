@@ -1,0 +1,73 @@
+# How client connects to the internet
+
+# 📘 End-to-End Flow: What Happens When You Type `amazon.com`
+
+## 1. Browser Initiates Request
+
+- You type `amazon.com` in the browser.
+- Browser needs the server’s IP address → queries **DNS**.
+
+## 2. DNS Resolution
+
+- DNS translates `amazon.com` → Amazon’s **public IP address** (e.g., `52.94.xxx.xxx`).
+- Amazon uses **CDNs** and **load balancers**, so IPs vary by location for efficiency.
+
+## 3. Data Center
+
+- That IP points to a **data center** (a physical site with thousands of servers).
+- Each server can run multiple applications simultaneously.
+
+## 4. Ports and Applications
+
+- To distinguish applications on the same server, each listens on a **port number**:
+    - HTTP → Port 80
+    - HTTPS → Port 443
+    - MySQL → Port 3306
+- Browser automatically uses **port 443** for secure HTTPS.
+
+## 5. Connection Setup
+
+- Communication is established between:
+
+(Client IP:Ephemeral Port)  ⟷  (Server IP:443)
+
+### Example:
+
+- **Client (Laptop):** `192.168.1.5 : 54321`
+    - `192.168.1.5` → your laptop’s private IP
+    - `54321` → random ephemeral port chosen by browser
+- **Server (Amazon):** `52.94.225.248 : 443`
+    - `52.94.225.248` → Amazon’s public IP
+    - `443` → HTTPS application port
+
+This **socket pair** uniquely identifies the communication channel.
+
+## 6. TCP + TLS Handshake
+
+- **TCP 3-way handshake** → establishes reliable connection.
+- **TLS handshake** → secures communication with encryption.
+- Now all requests (login, browsing, checkout) flow through this encrypted tunnel.
+
+## 7. Application Layer
+
+- Request reaches Amazon’s **web application** running on port 443.
+- Different services handle different tasks:
+    - Authentication service → login.
+    - Catalog service → browsing products.
+    - Payment service → checkout.
+
+## 🔑 Key Concepts
+
+- **IP Address = Which server machine to talk to.**
+- **Port Number = Which application on that machine to talk to.**
+- Together: `IP : Port` uniquely identifies an application endpoint.
+
+## ⚡ Analogy
+
+- **IP Address = Street address of a building.**
+- **Port Number = Room number inside the building.**
+- Only with both can your “letter” (data packet) reach the right person.
+
+## 🎯 Interview-Ready Explanation
+
+> “When I type `amazon.com`, my browser first queries DNS to resolve the domain into an IP address. That IP points to Amazon’s data center. Since servers run multiple applications, each application listens on a specific port — for HTTPS it’s port 443. My laptop then establishes a TCP connection from its IP and a random ephemeral port to Amazon’s IP on port 443. This socket pair uniquely identifies the communication channel. A TLS handshake secures the connection, and finally my request reaches Amazon’s web application, which processes it and sends back the response.”
