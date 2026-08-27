@@ -1,0 +1,344 @@
+### Standalone Application
+
+- Runs entirely on your **local system**.
+- **Does NOT require internet** access.
+- Examples: Notepad, Calculator, Paint, MS Word.
+- Built using only Core Java concepts.
+
+### Web Application
+
+- Can be accessed **remotely**, from anywhere.
+- **Requires two things:**
+    1. An **active internet connection**
+    2. A **browser**
+- Examples: Amazon, Airbnb, Zomato, BookMyShow.
+- This is what Advanced Java (JEE) is designed to help you build.
+
+**Interview one-liner:** *"A standalone application executes locally without needing a network; a web application is deployed on a server and accessed remotely via a browser over the internet."*
+
+---
+
+## 3. What Is Advanced Java? (JEE / J2EE / Jakarta EE)
+
+To build a web application, you need to learn:
+
+- **Servlets** – Java classes that handle HTTP requests/responses on the server side.
+- **JSP (Java Server Pages)** – Allows embedding Java code inside HTML for dynamic web pages.
+- **EJB (Enterprise Java Beans)** – Used for building scalable, transactional, distributed enterprise components.
+- **Java Server Faces** and other enterprise-level frameworks.
+
+All of these together form what is called **Advanced Java**, also known as:
+
+> **JEE = Java Enterprise Edition** (older name)
+**Jakarta EE** (current name)
+> 
+
+### History / Naming Timeline (Common Interview Trivia)
+
+| Year | Event |
+| --- | --- |
+| ~1995 (1990s) | Java released by **Sun Microsystems** |
+| 1997 | Advanced Java released, originally called **J2EE** (Java 2 Enterprise Edition) |
+| 2005 | Renamed from **J2EE** to **JEE** (Java Enterprise Edition) |
+| ~2009–2010 | Sun Microsystems ran into financial trouble and was **acquired by Oracle** |
+| ~2018–2019 | Oracle transferred ownership of the Enterprise Edition specification to the **Eclipse Foundation** |
+| Post-2019 | Renamed again to **Jakarta EE** (because Oracle retained rights to the "Java" trademark, so the Eclipse Foundation had to rebrand it) |
+
+**Key point for interviews:**
+
+- **Core Java** is still governed under the "Java" brand (originally Sun → now Oracle).
+- **Enterprise/Advanced Java** is now maintained by the **Eclipse Foundation** and officially called **Jakarta EE**.
+- You may hear people casually say "J2EE" or "JEE" — all refer to the same enterprise technology stack, just different eras/names. Interviewers rarely quiz you deeply on this trivia; they care more about your understanding of the underlying logic (Servlets, JSP, etc.) than the naming history.
+
+---
+
+## 4. What Is a Server? (Core Concept)
+
+A **server is simply a computer** — but not just any computer.
+
+### The Server Formula
+
+```
+Server = Powerful Hardware + Powerful Software + Server Software
+```
+
+Just having powerful hardware and a general-purpose operating system does **NOT** make a machine a server. You need one more critical ingredient:
+
+> **Server Software** — a special program whose job is to **handle incoming requests and send back responses**.
+> 
+
+A server is a computer system or software application that provides services, resources, or data to other computers, called clients, over a network, it *has server software (special program) installed on it. The server software's core job is to handle HTTP requests and return responses basically its job is to handle*  **incoming requests and send back responses***.  For example, a web server delivers web pages, a database server manages data queries, and a mail server handles email communication. In short, servers centralize resources and make them accessible to multiple clients, ensuring efficiency, scalability, and security in a networked environment.”*
+
+Once a system has server software installed and running on it, that system is called a **server**.
+
+### Examples of Server Software
+
+| Server Software | Notes |
+| --- | --- |
+| **Apache Tomcat** | Most compatible/commonly used with **Java** applications (this is what's used in the class) |
+| SAP NetWeaver | Enterprise server software |
+| Nginx (referred to as "engines") | Popular for high-performance web serving |
+| Red Hat (JBoss/WildFly) | Enterprise Java server offerings |
+
+**Interview one-liner:** *"A server is just a regular computer that has server software installed on it. The server software's core job is to handle HTTP requests and return responses."*
+
+---
+
+## 5. How Does a Web Application Actually Work? (End-to-End Flow)
+
+### Step-by-Step Real-World Analogy
+
+The instructor used an analogy: getting your degree certificate from a college.
+
+1. You know the **address/location** of the college (like an IP address).
+2. You go there with a **request** ("I want my certificate").
+3. The right **department** processes it and gives you a **response** (the certificate).
+
+The exact same request-response pattern happens in web applications.
+
+### Technical Flow When You Type `amazon.com`
+
+1. **Browser sends a request** to a server somewhere in the world.
+2. That server is inside a **Data Center** — a physical location housing **thousands of server computers**, each running various applications.
+3. Every application on a server machine runs on a specific **Port Number** (since multiple apps can run on the same server machine).
+4. To reach the correct machine, you need its **IP Address**.
+5. To reach the correct application on that machine, you need the **Port Number**.
+6. Together: `IP Address : Port Number` uniquely identifies an application on a server.
+
+**Example:**
+
+```
+192.168.1.10:80    → Might route to Amazon's application
+192.168.1.10:443   → Might route to a different app (e.g., Swiggy) on the same machine
+```
+
+### Why We Don't Type IP Addresses Manually
+
+It's difficult for humans to remember numeric IP addresses (just like it's hard to remember everyone's phone number). The analogy used: you save phone numbers in **Contacts** with names instead of memorizing digits.
+
+The internet equivalent of "Contacts" is:
+
+> **DNS (Domain Name System)**
+> 
+
+**What DNS does:**
+
+- Maps a human-friendly name (like `amazon.com`) to the actual `IP Address : Port Number`.
+- When you type `amazon.com` in the browser:
+    1. Browser sends the request to a **DNS server**.
+    2. DNS **resolves** the domain name into its actual IP address (+ port).
+    3. Request is forwarded to the correct server & application.
+    4. Server sends back the response, which the browser renders as the webpage.
+
+### Full Request Flow Diagram (Conceptual)
+
+```
+User types "amazon.com" in browser
+        ↓
+   DNS Server (resolves domain → IP address)
+        ↓
+   Request travels to Server (Data Center)
+        ↓
+   Server machine identified via IP Address
+        ↓
+   Correct Application identified via Port Number
+        ↓
+   Server Software (e.g., Tomcat) processes the request
+        ↓
+   Response sent back to Browser
+        ↓
+   Browser renders the page (e.g., Amazon homepage)
+```
+
+**Common interview question:** *"What happens when you type a URL in the browser and press Enter?"***Model Answer:** "The browser first sends the domain name to a DNS server, which resolves it into an IP address and port number. The request is then routed over the internet to the server machine hosting that IP. The server software (like Apache Tomcat) on that machine receives the request, processes it through the deployed application, and sends back an HTTP response, which the browser then renders as a web page."
+
+---
+
+## 6. Setting Up a Local Development Server (Practical / Hands-on)
+
+Since real production servers cost significant money (lakhs of rupees) to purchase/host, for learning purposes we **convert our own local system into a server** by installing server software.
+
+### Steps to Set Up Apache Tomcat + Eclipse for Web Development
+
+1. **Download Tomcat Server**
+    - Search for "Apache Tomcat" and go to the official Apache Tomcat website.
+    - Choose a **stable, non-latest version** (e.g., Tomcat 10) — avoid always picking the newest version, since major version changes (e.g., Tomcat 9 vs 10) change import package names (`javax.*` vs `jakarta.*`) and can break your code if you're following older tutorials or working with a batch that's standardized on a specific version.
+    - Download the **64-bit Windows ZIP** version (or the appropriate OS build).
+2. **Extract the Server**
+    - Unzip the downloaded Tomcat folder into a project workspace folder (e.g., `D:\Batch\workspace`).
+    - Delete the zip file after extraction (optional cleanup).
+3. **Set Up Eclipse Workspace**
+    - Open Eclipse → `File` → `Switch Workspace` → `Other` → Browse to your new folder → `Launch`.
+    - Select **Java EE perspective** (this option only appears if you installed **"Eclipse IDE for Enterprise Java Developers"**, not the basic "Eclipse for Java Developers" edition). If this option is missing, uninstall and reinstall Eclipse with the correct enterprise edition — but never delete your workspace folder when doing this, since that would delete all your code.
+4. **Add the Tomcat Server to Eclipse**
+    - Go to the **Servers** tab → "No servers are available" → click the link to add a new server.
+    - Select **Apache → Tomcat v10.1** (match the version you downloaded).
+    - Browse to the extracted Tomcat folder (select the folder that directly contains the `bin` folder — not a level above or the `bin` folder itself).
+    - Click **Next → Finish**.
+5. **Start the Server**
+    - Right-click the server in the Servers tab → **Start**.
+    - Test by opening a browser and navigating to:
+        
+        ```
+        http://localhost:8080
+        ```
+        
+    - Since client and server are the **same machine** during local development, the IP address is represented as `localhost` (or `127.0.0.1`).
+6. **Understanding HTTP Status Codes You'll See**
+    
+    
+    | Status | Meaning |
+    | --- | --- |
+    | "This site can't be reached" | Server isn't added properly or isn't started |
+    | **HTTP 404 (Not Found)** | Good news — the server connection **works**, but there's no application/resource deployed there yet |
+7. **Changing the Default Port Number**
+    - Double-click the server entry in Eclipse → find the **port number field** (default is `8080`).
+    - Change it to any custom value (e.g., `8081`) if there's a conflict or preference.
+    - **Restart the server** after any configuration change for it to take effect.
+    - Always clear browser cache or use a different browser/incognito window when testing port changes, since browsers cache old requests.
+
+---
+
+## 7. Creating a Dynamic Web Project
+
+Unlike a plain **Java Project** (used for Core Java), Advanced Java web development requires a **Dynamic Web Project**.
+
+### Steps
+
+1. `File` → `New` → **Dynamic Web Project**.
+2. Enter a **Project Name**.
+3. Under **Target Runtime**, select your installed **Apache Tomcat** server.
+4. Choose the **Dynamic Web Module version** (matches your Tomcat version).
+5. On the final screen, make sure to **check "Generate web.xml deployment descriptor"** — without this file, the project structure won't properly support servlet configuration (you *can* technically skip it in newer versions using annotations, but for foundational learning it's required).
+6. Click **Finish**.
+
+### Project Folder Structure Explained
+
+```
+MyWebProject/
+├── Deployment Descriptor (web.xml)
+├── Java Resources/
+│   └── src/                  → All your .java files (Servlets, business logic) go here
+├── Build/
+├── WebContent (or webapp)/
+│   ├── META-INF/             → Metadata, NOT for your HTML files
+│   ├── WEB-INF/
+│   │   └── web.xml           → Configuration file (welcome-file list, servlet mappings, etc.)
+│   └── index.html            → Your HTML/JSP files go DIRECTLY here (not inside META-INF or WEB-INF)
+```
+
+**Critical rule:** All static content (HTML files) must be placed **directly inside `WebContent`/`webapp`**, not inside `META-INF` or `WEB-INF`. If placed incorrectly, the file simply won't be accessible/executable when you run the project.
+
+### Running the Project
+
+1. Right-click the project → `Run As` → **Run on Server**.
+2. Select your configured Tomcat server → **Finish**.
+3. Eclipse will start the server (if not already running) and deploy your project.
+4. The browser opens automatically and shows your output, e.g.:
+    
+    ```
+    http://localhost:8081/MyWebProject/
+    ```
+    
+
+### URL Anatomy
+
+```
+http://localhost : 8081 / MyWebProject / index.html
+   ↑        ↑         ↑         ↑              ↑
+protocol   IP      port    project name    specific file
+          (host)                          (resource/page)
+```
+
+---
+
+## 8. Default Welcome File Behavior (index.html)
+
+**Question asked in class:** *If I create both `index.html` and `first.html`, and just run the project without specifying a filename, which page loads?*
+
+**Answer: `index.html` loads by default.**
+
+**Why?** Because `index.html` is the **default welcome file** defined by the Servlet/Java EE specification. It behaves similarly to how the `main()` method is the default entry point in a standalone Java program — except this default is configured, not language-enforced.
+
+### How to Change the Default Welcome File
+
+1. Open `WEB-INF/web.xml` in **Source** view (not Design view).
+2. Find/add the `<welcome-file-list>` configuration.
+3. Change the entry from `index.html` to any file you want as default (e.g., `first.html`).
+4. Save the file and **restart the server** for changes to take effect.
+
+**Example web.xml snippet (conceptual):**
+
+```xml
+<welcome-file-list>
+    <welcome-file>first.html</welcome-file>
+</welcome-file-list>
+```
+
+**Fallback order:** If `index.html` is not found, the server checks for `index.jsp`, and so on, based on the order defined in the welcome-file-list. If none exist, no default page is served, and the user must specify the exact filename in the URL.
+
+---
+
+## 9. Quick Recap Table – Key Terms Glossary (High-Value for Interviews)
+
+| Term | Definition |
+| --- | --- |
+| **Server** | A computer with server software installed, capable of handling requests and sending responses |
+| **Server Software** | Software (e.g., Apache Tomcat) that processes HTTP requests/responses |
+| **Data Center** | A physical facility housing many server machines |
+| **IP Address** | Unique numeric address identifying a machine on a network |
+| **Port Number** | Identifies a specific application running on a server machine (e.g., 8080, 443) |
+| **DNS (Domain Name System)** | Translates human-readable domain names (amazon.com) into IP addresses |
+| **Standalone Application** | Runs locally, no internet required (e.g., Notepad) |
+| **Web Application** | Accessed remotely via browser + internet (e.g., Amazon, Zomato) |
+| **Servlet** | Java class that handles requests/responses on the server side (core building block of Java web apps) |
+| **JSP (Java Server Pages)** | Allows embedding Java code within HTML for dynamic content |
+| **EJB (Enterprise Java Beans)** | Framework for scalable, distributed enterprise-level components |
+| **J2EE / JEE / Jakarta EE** | Historical names for the same "Advanced Java" enterprise specification, now maintained by the Eclipse Foundation |
+| **Dynamic Web Project** | Eclipse project type used to build Java web applications (vs. a plain Java Project) |
+| **web.xml** | Deployment descriptor file that configures welcome files, servlet mappings, etc. |
+| **WebContent / webapp folder** | Where all client-facing files (HTML, JSP, CSS) must be placed |
+| **WEB-INF** | Contains configuration files (like web.xml) and compiled classes — not directly accessible by clients |
+| **localhost** | Refers to your own machine (used when client and server are the same system during development) |
+| **HTTP 404** | "Not Found" — indicates the server connection is working, but the specific resource/page doesn't exist |
+
+---
+
+## 10. Likely Interview Questions & Model Answers
+
+**Q1: What is the difference between Core Java and Advanced Java?**
+
+> Core Java covers language fundamentals — OOP, exceptions, collections, multithreading, and basic database connectivity (JDBC). Advanced Java (Jakarta EE) builds on top of this to enable building web applications, using technologies like Servlets, JSP, and EJB.
+> 
+
+**Q2: What is a server, in your own words?**
+
+> A server is a regular computer that has server software installed on it (like Apache Tomcat), which allows it to receive requests from clients and send back responses. Without server software, even the most powerful hardware is not technically a "server."
+> 
+
+**Q3: Why is a port number needed if we already have an IP address?**
+
+> An IP address identifies the machine, but a single machine can run multiple applications simultaneously. The port number tells the server exactly which application on that machine should handle the incoming request.
+> 
+
+**Q4: What is the role of DNS?**
+
+> DNS acts as a directory service that converts human-friendly domain names (like google.com) into machine-readable IP addresses, so users don't have to memorize numeric addresses.
+> 
+
+**Q5: What is the default welcome file in a Java web project, and can it be changed?**
+
+> By default, it's `index.html` (or `index.jsp`). It can be changed by editing the `<welcome-file-list>` element inside the `web.xml` deployment descriptor.
+> 
+
+**Q6: Why is Java EE now called Jakarta EE?**
+
+> After Oracle acquired Sun Microsystems and later transferred governance of the Enterprise Edition specification to the Eclipse Foundation, Oracle retained the "Java" trademark, so the specification was rebranded as "Jakarta EE" to reflect the new governing body.
+> 
+
+**Q7: Where should HTML files be placed in a Dynamic Web Project, and why?**
+
+> They must be placed directly inside the `WebContent`/`webapp` folder — not inside `WEB-INF` or `META-INF` — because those subfolders are reserved for configuration and metadata, and files placed there are not served directly to clients.
+> 
+
+---
